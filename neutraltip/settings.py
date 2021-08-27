@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     # My apps
     'home.apps.HomeConfig',
     'article.apps.ArticleConfig',
-
 ]
 
 MARKDOWNIFY = {
