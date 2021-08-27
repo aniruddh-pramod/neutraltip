@@ -1,15 +1,44 @@
 {% extends 'home/base.html' %}
 {% load static %}
 
-{% block title %}Neutral Tip{% endblock title %} {% block body %}
-<!-- header 
-   ================================================== -->
-{% include 'home/components/~common/navbar.html' with page="home" %}
-<!-- end header -->
+{% block title %}Neutral Tip{% endblock title %}
+
+{% block body %}
 
 <!-- masonry
-   ================================================== -->
-{% include 'home/components/Home/home-section.html' with page="home" %}
+	 ================================================== -->
+<section id="bricks">
+	<div class="row masonry">
+		<!-- brick-wrapper -->
+		<div class="bricks-wrapper">
+			<div class="grid-sizer"></div>
+
+			{% include 'home/components/Home/featured.html' with featured_articles=featured_articles %}
+			
+			{% for article in articles %}
+				{% include 'home/components/Home/general-card.html' with article=article %}
+			{% endfor %}
+		</div>
+		<!-- end brick-wrapper -->
+	</div>
+	<!-- end row -->
+
+	<div class="row">
+		<nav class="pagination">
+			<span class="page-numbers prev inactive">Prev</span>
+			<span class="page-numbers current">1</span>
+			<a href="#" class="page-numbers">2</a>
+			<a href="#" class="page-numbers">3</a>
+			<a href="#" class="page-numbers">4</a>
+			<a href="#" class="page-numbers">5</a>
+			<a href="#" class="page-numbers">6</a>
+			<a href="#" class="page-numbers">7</a>
+			<a href="#" class="page-numbers">8</a>
+			<a href="#" class="page-numbers">9</a>
+			<a href="#" class="page-numbers next">Next</a>
+		</nav>
+	</div>
+</section>
 <!-- end bricks -->
 
 {% endblock body %}

@@ -1,16 +1,25 @@
+{% url 'home_index' as home_index %}
+{% url 'category_list' as category_list %}
+{% url 'blog_index' as blog_index %}
+{% url 'about_page' as about_page %}
+{% url 'contact_page' as contact_page %}
+
 <header class="short-header">
   <div class="gradient-block"></div>
 
   <div class="row header-content">
     <div class="logo">
-      <a href="index.html">Author</a>
+      <a href="{% url 'home_index' %}">Author</a>
     </div>
 
+    {% with request.path as current_url %}
     <nav id="main-nav-wrap">
       <ul class="main-navigation sf-menu">
-        <li class="{% if page == 'home' %}current{% endif %}"><a href="index.html" title="">Home</a></li>
-        <li class="has-children {% if page == 'categories' %}current{% endif %}">
-          <a href="category.html" title="">Categories</a>
+        <li class="{% if current_url == "/" %}current{% endif %}">
+          <a href="{% url 'home_index' %}" title="">Home</a>
+        </li>
+        <li class="has-children {% if "category" in current_url %}current{% endif %}">
+          <a href="{% url 'category_list' %}" title="">Categories</a>
           <ul class="sub-menu">
             <li><a href="category.html">Wordpress</a></li>
             <li><a href="category.html">HTML</a></li>
@@ -20,8 +29,8 @@
             <li><a href="category.html">Branding</a></li>
           </ul>
         </li>
-        <li class="has-children {% if page == 'blog' %}current{% endif %}">
-          <a href="single-standard.html" title="">Blog</a>
+        <li class="has-children {% if "blog" in current_url %}current{% endif %}">
+          <a href="{% url 'blog_index' %}" title="">Blog</a>
           <ul class="sub-menu">
             <li><a href="single-video.html">Video Post</a></li>
             <li><a href="single-audio.html">Audio Post</a></li>
@@ -29,11 +38,15 @@
             <li><a href="single-standard.html">Standard Post</a></li>
           </ul>
         </li>
-        <li class="{% if page == 'styles' %}current{% endif %}"><a href="style-guide.html" title="">Styles</a></li>
-        <li class="{% if page == 'about' %}current{% endif %}"><a href="about.html" title="">About</a></li>
-        <li class="{% if page == 'contact' %}current{% endif %}"><a href="contact.html" title="">Contact</a></li>
+        <li class="{% if "about" in current_url %}current{% endif %}">
+          <a href="{% url 'about_page' %}" title="">About</a>
+        </li>
+        <li class="{% if "contact" in current_url %}current{% endif %}">
+          <a href="{% url 'contact_page' %}" title="">Contact</a>
+        </li>
       </ul>
     </nav>
+    {% endwith %}
     <!-- end main-nav-wrap -->
 
     <div class="search-wrap">

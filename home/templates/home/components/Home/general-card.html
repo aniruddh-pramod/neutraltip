@@ -1,0 +1,36 @@
+<article class="brick entry format-standard animate-this">
+  {% if article.thumb %}
+  <div class="entry-thumb">
+    <a href="single-standard.html" class="thumb-link">
+      <img src="{{article.thumb.url}}" alt="{{article.thumb_alt}}" />
+    </a>
+  </div>
+  {% endif %}
+
+  <div class="entry-text">
+    <div class="entry-header">
+      <div class="entry-meta">
+        <span class="cat-links">
+          {% for tag in tags %}
+          <a href="#">{{tag}}</a>
+          {% endfor %}
+        </span>
+      </div>
+
+      <h1 class="entry-title">
+        <a href="{% url 'article_detail' slug=article.slug %}">{{article.title}}</a>
+      </h1>
+    </div>
+
+    <div class="entry-excerpt">{{article.excerpt}}</div>
+
+    <ul class="entry-meta">
+      <span class="cat-links">
+        {{article.date |date:"F j, Y, g:i a"}}
+        <a href="#">
+          {{article.author.first_name}} {{article.author.last_name}}
+        </a>
+      </span>
+    </ul>
+  </div>
+</article>
