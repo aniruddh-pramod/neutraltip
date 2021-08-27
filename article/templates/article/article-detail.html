@@ -1,0 +1,12 @@
+{% extends 'home/base.html' %}
+{% load markdownify %}
+{% load static %}
+
+{% block title %}
+{{ article.title }} | by {{article.author.first_name}} {{article.author.last_name}}{% endblock title %}
+
+{{ article.slug }} <br>
+{{ article.title }} <br><br>
+{{ article.body |markdownify}} <br><br>
+{{ article.author }} <br>
+{{ article.date }} <br>
