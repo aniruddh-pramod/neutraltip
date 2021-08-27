@@ -6,9 +6,44 @@ from django.urls import reverse
 
 # Create your models here.
 
+class Category(models.Model):
+    name = models.CharField(max_length=50, unique=True, null=False)
+
+    def __str__(self):
+        return self.name
+
+    def save(self, *args, **kwargs):
+        self.name = self.name.lower()
+        return super(Category, self).save(*args, **kwargs)
+
+    class Meta:
+        ordering = ['name']
+        verbose_name_plural = 'Categories'
+
+
+
+class Tag(models.Model):
+    name = models.CharField(max_length=50, unique=True, null=False)
+
+    def __str__(self):
+        return self.name
+
+    def save(self, *args, **kwargs):
+        self.name = self.name.lower()
+        return super(Tag, self).save(*args, **kwargs)
+
+    class Meta:
+        ordering = ['name']
+        verbose_name_plural = 'Tags'
+
+
+
 class Article(models.Model):
     title = models.CharField(max_length=100)
-    slug = models.SlugField(default='', editable=False, max_length=200, null = False, unique=True)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category')
+    tag = models.ManyToManyField(Tag, related_name='tag')
+    slug = models.SlugField(default='', editable=False,
+                            max_length=200, null=False, unique=True)
     body = models.TextField()
     date = models.DateTimeField(auto_now_add=True)
     auto_now_add = True
@@ -20,21 +55,23 @@ class Article(models.Model):
 
     def snippet(self):
         return self.body[:50] + '...'
-    
+
     def get_absolute_url(self):
         kwargs = {
             'pk': self.id,
             'slug': self.slug
         }
         return reverse('article-detail', kwargs=kwargs)
-    
+
     def save(self, *args, **kwargs):
         if not self.id:
-            self.slug = slugify(self.title + '--' + get_random_string(length=7))
+            self.slug = slugify(self.title + '--' +
+                                get_random_string(length=7))
         super(Article, self).save(*args, **kwargs)
-    
+
     class Meta:
         ordering = ['-date']
+
 
 
 class Comment(models.Model):
@@ -46,29 +83,6 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.name
-    
+
     class Meta:
         ordering = ['-date']
-
-
-class Tag(models.Model):
-    article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='tags')
-    name = models.CharField(max_length=50)
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        ordering = ['name']
-        verbose_name_plural = 'Tags'
-
-class Category(models.Model):
-    article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='categories')
-    name = models.CharField(max_length=50)
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        ordering = ['name']
-        verbose_name_plural = 'Categories'
