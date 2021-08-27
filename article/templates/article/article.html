@@ -1,0 +1,11 @@
+{% load markdownify %}
+
+{% for article in article_list %}
+
+{{ article.slug }} <br>
+{{ article.title }} <br><br>
+{{ article.body |markdownify}} <br><br>
+{{ article.author }} <br>
+{{ article.date }} <br>
+
+{% endfor %}
