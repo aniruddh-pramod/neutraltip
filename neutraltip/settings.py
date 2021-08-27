@@ -37,7 +37,26 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Third-party apps
+    'markdownify.apps.MarkdownifyConfig',
+
+    # My apps
+    'home.apps.HomeConfig',
+    'article.apps.ArticleConfig',
+
 ]
+
+MARKDOWNIFY = {
+  "default": {
+     "WHITELIST_TAGS": ["a", "p", "h1", "br",]
+  },
+
+  "alternative": {
+     "WHITELIST_TAGS": ["a", "p", ],
+     "MARKDOWN_EXTENSIONS": ["markdown.extensions.fenced_code", ]
+  }
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -54,7 +73,7 @@ ROOT_URLCONF = 'neutraltip.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [ BASE_DIR/'templates' ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
