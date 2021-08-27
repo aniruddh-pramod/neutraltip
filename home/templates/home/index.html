@@ -1,0 +1,15 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block title %}Neutral Tip{% endblock title %} {% block body %}
+<!-- header 
+   ================================================== -->
+{% include 'home/components/~common/navbar.html' with page="home" %}
+<!-- end header -->
+
+<!-- masonry
+   ================================================== -->
+{% include 'home/components/Home/home-section.html' with page="home" %}
+<!-- end bricks -->
+
+{% endblock body %}
