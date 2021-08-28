@@ -11,8 +11,8 @@
     <div class="entry-header">
       <div class="entry-meta">
         <span class="cat-links">
-          {% for tag in tags %}
-          <a href="#">{{tag}}</a>
+          {% for tag in article.tags.all %}
+          <a href="{% url 'tag_page' tag=tag %}">{{tag}}</a>
           {% endfor %}
         </span>
       </div>
