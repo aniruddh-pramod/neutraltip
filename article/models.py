@@ -41,11 +41,11 @@ class Tag(models.Model):
 class Article(models.Model):
     title = models.CharField(max_length=100)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category')
-    tags = models.ManyToManyField(Tag, related_name='tag', blank=True)
-    slug = models.SlugField(default='', editable=False,
-                            max_length=200, null=False, unique=True)
+    tags = models.ManyToManyField(Tag, blank=True, related_name='tag')
+    slug = models.SlugField(default='', editable=False, max_length=200, null=False, unique=True)
     body = models.TextField()
     excerpt = models.TextField(max_length=500, blank=True)
+    show_excerpt_in_article = models.BooleanField(default=True)
     date = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     thumb = models.ImageField(blank=True)
