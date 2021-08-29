@@ -29,17 +29,31 @@
 
 	<div class="row">
 		<nav class="pagination">
-			<span class="page-numbers prev inactive">Prev</span>
-			<span class="page-numbers current">1</span>
-			<a href="#" class="page-numbers">2</a>
-			<a href="#" class="page-numbers">3</a>
-			<a href="#" class="page-numbers">4</a>
-			<a href="#" class="page-numbers">5</a>
-			<a href="#" class="page-numbers">6</a>
-			<a href="#" class="page-numbers">7</a>
-			<a href="#" class="page-numbers">8</a>
-			<a href="#" class="page-numbers">9</a>
-			<a href="#" class="page-numbers next">Next</a>
+			{% if current_page == 1 %}
+				<span class="page-numbers prev inactive">Prev</span>
+			{% else %}
+				<a href="/?page={{ current_page|add:"-1" }}" class="page-numbers prev">Prev</a>
+			{% endif %}
+
+			{% for page in paginations %}
+				{% if page == current_page %}
+					<span class="page-numbers current">{{ page }}</span>
+				{% else %}
+					<a href="/?page={{ page }}" class="page-numbers">{{ page }}</a>
+				{% endif %}
+			{% endfor %}
+
+			{% comment %}
+				wraping in with block to split 'range(from, to)' into list
+				and then we subtracted 1 from 9th index element to get the last page number
+			{% endcomment %}
+			{% with paginations|make_list as range_string_list %}
+				{% if current_page == range_string_list.9|add:"-1" %}
+					<span class="page-numbers next inactive">Next</span>
+				{% else %}
+					<a href="/?page={{ current_page|add:"1" }}" class="page-numbers next">Next</a>
+				{% endif %}
+			{% endwith %}
 		</nav>
 	</div>
 </section>
