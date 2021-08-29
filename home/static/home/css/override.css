@@ -1,3 +1,13 @@
 #content-wrap .content-media {
-    text-align: center;
+  text-align: center;
+}
+
+.blog-single .author-profile svg {
+  margin: 0.6rem 0 0 0 !important;
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+  position: absolute;
+  left: 0;
+  top: 0;
 }
