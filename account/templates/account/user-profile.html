@@ -1,0 +1,122 @@
+{% extends 'home/base.html' %}
+
+{% block meta %}
+{% include 'home/components/~common/meta.html' with meta_title=user.userprofile.get_full_name|add:' (@'|add:user.username|add:') | Neutral Tip' meta_desc=user.userprofile.bio %}
+{% endblock meta %}
+
+{% block title %}
+{{user.userprofile.get_full_name}} (@{{user.username}}) | Neutral Tip
+{% endblock title %}
+
+{% block css %}
+.main {
+    margin-top: 3em;
+    margin-bottom: 3em;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 55em;
+}
+
+.upper-section {
+    display: flex;
+    flex-direction: row;
+}
+
+.upper-section img, .upper-section h1 {
+    display: inline;
+    margin-top: 0;
+}
+
+.upper-section img {
+    width: 240px;
+    height: 240px;
+    vertical-align: top;
+    user-select: none;
+}
+
+.about-user {
+    margin-top: 2em;
+    margin-left: 4em;
+    display: flex;
+    flex-direction: column;
+}
+
+.about-user .socials a {
+    color: #000;
+    font-size: 1.5em;
+    margin-right: 1em;
+}
+
+.lower-section {
+    margin-top: 2em;
+}
+
+.tabs {
+    text-align: right;
+    border-bottom: 1px solid #ccc;
+}
+.tabs a {
+    color: unset;
+}
+
+.tab-content {
+    margin-top: 2em;
+}
+
+{% endblock css %}
+
+{% block body %}
+
+    <div class="main">
+        <div class="upper-section">
+            <img src="{{user.userprofile.profile_pic.url}}" alt="{{user.userprofile.}}">
+
+            <div class="about-user">
+                <h1 class="name">{{user.userprofile.get_full_name}} (@{{user.username}})</h1>
+                <p class="bio">{{user.userprofile.bio}}</p>
+                <div class="socials">
+                    {% if user.userprofile.facebook %}
+                        <a href="{{user.userprofile.facebook}}" target="_blank"><i class="fa fa-facebook"></i></a>
+                    {% endif %}
+                    {% if user.userprofile.twitter %}
+                        <a href="{{user.userprofile.twitter}}" target="_blank"><i class="fa fa-twitter"></i></a>
+                    {% endif %}
+                    {% if user.userprofile.instagram %}
+                        <a href="{{user.userprofile.instagram}}" target="_blank"><i class="fa fa-instagram"></i></a>
+                    {% endif %}
+                    {% if user.userprofile.website %}
+                        <a href="{{user.userprofile.website}}" target="_blank"><i class="fa fa-link"></i></a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        
+
+        <div class="lower-section">
+            <div class="tabs">
+                <a href="{{request.get_absolute_path}}?"><button class="button {% if not tab %}button-primary{% endif %}">About</button></a>
+                <a href="{{request.get_absolute_path}}?tab=articles"><button class="button {% if tab == 'articles' %}button-primary{% endif %}">Articles</button></a>
+                <a href="{{request.get_absolute_path}}?tab=tips"><button class="button {% if tab == 'tips' %}button-primary{% endif %}">Tips</button></a>
+            </div>
+
+            <div class="tab-content">
+                {% if tab == 'articles' %}
+                    <ul>
+                    {% for article in articles %}
+                    <li>
+                        <a href="{% url 'article_detail' slug=article.slug %}">{{article}}</a>
+                         - {{article.date}}
+                        
+                         ---
+                        <a href="{% url 'category_page' category=article.category %}">{{article.category |capfirst}}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                {% if tab == 'tips' %}
+                    <h1>feature coming soon</h1>
+                {% endif %}
+        </div>
+    </div>
+
+{% endblock body %}
