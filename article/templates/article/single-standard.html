@@ -1,8 +1,12 @@
 {% extends 'home/base.html' %}
 {% load markdownify %}
 
+{% block meta %}
+{% include 'home/components/~common/meta.html' with meta_title=article.title meta_desc=article.excerpt %}
+{% endblock meta %}
+
 {% block title %}
-{{ article.title }} | by {{article.author.first_name}} {{article.author.last_name}}
+{{ article.title }} | by {{article.author.userprofile.get_full_name}} | Neutral Tip
 {% endblock title %}
 
 {% block body %}
@@ -27,7 +31,7 @@
 					<h1 class="page-title">{{article.title}}</h1>	
 
 					<ul class="entry-meta">
-						by <a href="{{article.author.get_absolute_url}}">{{article.author.first_name}} {{article.author.last_name}}</a>
+						by <a href="{% url 'user_profile' user=article.author %}">{{article.author.userprofile.get_full_name}}</a>
 						- <li class="date">{{article.date |date:"F j, Y, g:i a"}}</li>
 						<br>
 						<li class="cat">
@@ -35,10 +39,10 @@
 						</li>
 					</ul>
 
-					<div class="entry-content">
-					{% if article.show_excerpt_in_article %}
-					<p class="lead">{{article.excerpt}}</p>
-					{% endif %}
+					<div class="entry-excerpt">
+						{% if article.show_excerpt_in_article %}
+						<p class="lead">{{article.excerpt}}</p>
+						{% endif %}
 					</div>
 
 					{{article.body | markdownify}}
@@ -50,23 +54,42 @@
 						{% endfor %}
 					</p>
 
-					<div class="author-profile">
-					<img src="images/avatars/user-05.jpg" alt="">
+					{% with article.author.userprofile as author %}
+						{% if author.display_profile %}
+						<div class="author-profile">
+							{% if author.profile_pic %}
+							<img src="{{author.profile_pic.url}}" alt="{{author.get_full_name}}">
+							{% else %}
+							<svg data-jdenticon-value="{{author.get_full_name}} {{author.dob|date:"d/m/Y"}}"></svg>
+							{% endif %}
 
-					<div class="about">
-						<h4><a href="#">{{article.author.first_name}} {{article.author.last_name}}</a></h4>
-					
-						<p>Alias aperiam at debitis deserunt dignissimos dolorem doloribus, fuga fugiat impedit laudantium magni maxime nihil nisi quidem quisquam sed ullam voluptas voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-						</p>
+							<div class="about">
+								<h4><a href="{% url 'user_profile' user=author %}">{{author.get_full_name}}</a></h4>
 
-						<ul class="author-social">
-							<li><a href="#">Facebook</a></li>
-								<li><a href="#">Twitter</a></li>
-								<li><a href="#">GooglePlus</a></li>
-								<li><a href="#">Instagram</i></a></li>					        	
-						</ul>
-					</div>
-					</div> <!-- end author-profile -->						
+								{% if author.display_bio %}
+								<p>{{author.bio}}</p>
+								{% endif %}
+
+								{% if author.display_socials %}
+								<ul class="author-social">
+									{% if author.facebook %}
+									<li><a target="_blank" href="https://facebook.com/{{author.facebook}}">Facebook</a></li>
+									{% endif %}
+									{% if author.twitter %}
+									<li><a target="_blank" href="https://twitter.com/{{author.twitter}}">Twitter</a></li>
+									{% endif %}
+									{% if author.instagram %}
+									<li><a target="_blank" href="https://instagram.com/{{author.instagram}}">Instagram</i></a></li>					        	
+									{% endif %}
+									{% if author.website %}
+									<li><a target="_blank" href="{{author.website}}">Website</a></li>
+									{% endif %}
+								</ul>
+								{% endif %}
+							</div>
+						</div> <!-- end author-profile -->						
+						{% endif %}
+					{% endwith %}
 
 				</div> <!-- end entry-primary -->		  			   
 
