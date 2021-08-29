@@ -1,5 +1,19 @@
 {% load static %}
 
+<!-- ================================================== CREDITS ================================================== -->
+<!--
+			# Credits:
+				- UX Design: styleshout.com 's FREE Abstract template is used as a base for this site.
+				- Django Framework for the backend.
+				- Pillow library for image manipulation.
+				- Markdownify library for markdown support.
+				- Jdenticon library for user avatar generation.
+			
+			# a little info about me
+				- My name is Vaibhav Shukla, and this website is the result of my hard-work.
+-->
+<!-- ============================================================================================================= -->
+
 <!DOCTYPE html>
 <!--[if IE 8]><html class="no-js oldie ie8" lang="en"> <![endif]-->
 <!--[if IE 9]><html class="no-js oldie ie9" lang="en"> <![endif]-->
@@ -38,8 +52,8 @@
 
 		<!-- favicons
 		================================================== -->
-		<link rel="shortcut icon" href="{% static 'home/favicon.ico' %}" type="image/x-icon" />
-		<link rel="icon" href="{% static 'home/favicon.ico' %}" type="image/x-icon" />
+		<link rel="shortcut icon" href="{% static 'home/images/favicon.png' %}" type="image/x-icon" />
+		<link rel="icon" href="{% static 'home/images/favicon.png' %}" type="image/x-icon" />
 		
 		{% block meta %}{% endblock meta %}
 				
@@ -65,9 +79,11 @@
 		{% include 'home/components/~common/footer.html' %}
 		<!-- end footer-bottom -->
 
-		{% comment %} <div id="preloader">
-			<div id="loader"></div>
-		</div> {% endcomment %}
+		<!-- REMOVED BECAUSE IT WAS ANNOYING
+			<div id="preloader">
+				<div id="loader"></div>
+			</div>
+		-->
 
 		<!-- Java Script
 	 	================================================== -->
