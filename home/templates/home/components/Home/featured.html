@@ -22,8 +22,8 @@
               <ul class="entry-meta">
                 <li>{{article.date |date:"F j, Y, g:i a"}}</li>
                 <li>
-                  <a href="#">
-                    {{article.author.first_name}} {{article.author.last_name}}
+                  <a href="{% url 'user_profile' user=article.author %}">
+                    {{article.author.userprofile.get_full_name}}
                   </a>
                 </li>
               </ul>
