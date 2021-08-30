@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     # Third-party apps
     'markdownify.apps.MarkdownifyConfig',
+    'hitcount',
 
     # My apps
     'home.apps.HomeConfig',
