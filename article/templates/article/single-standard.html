@@ -1,9 +1,11 @@
 {% extends 'home/base.html' %}
 {% load markdownify %}
+{% load account_tags %}
 
 {% block meta %}
 {% include 'home/components/~common/meta.html' with meta_title=article.title meta_desc=article.excerpt %}
 {% endblock meta %}
+
 
 {% block title %}
 {{ article.title }} | by {{article.author.userprofile.get_full_name}} | Neutral Tip
@@ -31,11 +33,11 @@
 					<h1 class="page-title">{{article.title}}</h1>	
 
 					<ul class="entry-meta">
-						by <a href="{% url 'user_profile' user=article.author %}">{{article.author.userprofile.get_full_name}}</a>
-						- <li class="date">{{article.date |date:"F j, Y, g:i a"}}</li>
+						{% user_name article.author href=True %}
+						- <li class="date">{{article.get_datetime |date:"F j, Y, g:i a"}}</li>
 						<br>
 						<li class="cat">
-							Category: <a href="{% url 'category_page' category=article.category %}">{{article.category |capfirst}}</a>
+							Category: <a href="{% url 'article:category_page' category=article.category %}">{{article.category |capfirst}}</a>
 						</li>
 					</ul>
 
@@ -50,21 +52,17 @@
 					<p class="tags">
 						<span>Tagged in :</span>
 						{% for tag in article.tags.all %}
-						<a href="{% url 'tag_page' tag=tag %}">{{tag}}</a>
+						<a href="{% url 'article:tag_page' tag=tag %}">{{tag}}</a>
 						{% endfor %}
 					</p>
 
 					{% with article.author.userprofile as author %}
 						{% if author.display_profile %}
 						<div class="author-profile">
-							{% if author.profile_pic %}
-							<img src="{{author.profile_pic.url}}" alt="{{author.get_full_name}}">
-							{% else %}
-							<svg data-jdenticon-value="{{author.get_full_name}} {{author.dob|date:"d/m/Y"}}"></svg>
-							{% endif %}
+							{% profile_pic article.author %}
 
 							<div class="about">
-								<h4><a href="{% url 'user_profile' user=author %}">{{author.get_full_name}}</a></h4>
+								<h4>{% user_name article.author %}</h4>
 
 								{% if author.display_bio %}
 								<p>{{author.bio}}</p>
@@ -95,13 +93,13 @@
 
 				<div class="pagenav group">
 					<div class="prev-nav">
-					<a href="{% url 'article_detail' slug=previous_article.slug %}" rel="prev">
+					<a href="{% url 'article:detail' slug=previous_article.slug %}" rel="prev">
 						<span>Previous</span>
 						{{previous_article.title}}
 					</a>
 					</div>
 					<div class="next-nav">
-						<a href="{% url 'article_detail' slug=next_article.slug %}" rel="next">
+						<a href="{% url 'article:detail' slug=next_article.slug %}" rel="next">
 							<span>Next</span>
 							{{next_article.title}}
 						</a>
