@@ -1,3 +1,5 @@
+{% load account_tags %}
+
 <article class="brick entry format-standard animate-this">
   {% if article.thumb %}
   <div class="entry-thumb">
@@ -12,24 +14,28 @@
       <div class="entry-meta">
         <span class="cat-links">
           {% for tag in article.tags.all %}
-          <a href="{% url 'tag_page' tag=tag %}">{{tag}}</a>
+          <a href="{% url 'article:tag_page' tag=tag %}">{{tag}}</a>
           {% endfor %}
         </span>
       </div>
 
       <h1 class="entry-title">
-        <a href="{% url 'article_detail' slug=article.slug %}">{{article.title}}</a>
+        <a href="{% url 'article:detail' slug=article.slug %}">{{article.title}}</a>
       </h1>
     </div>
 
-    <div class="entry-excerpt">{{article.excerpt}}</div>
+    <div class="entry-excerpt">
+    {% if article.show_excerpt %}
+      {{article.excerpt}}
+    {% else %}
+      {{article.body|striptags|truncatechars:255}}
+    {% endif %}
+    </div>
 
     <ul class="entry-meta">
       <span class="cat-links">
-        {{article.date |date:"F j, Y, g:i a"}}
-        <a href="{% url 'user_profile' user=article.author %}">
-          {{article.author.userprofile.get_full_name}}
-        </a>
+        {{article.get_datetime |date:"F j, Y, g:i a"}}
+          {% user_name article.author href=True %}
       </span>
     </ul>
   </div>

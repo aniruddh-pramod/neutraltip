@@ -3,25 +3,25 @@
 
   <div class="row header-content">
     <div class="logo">
-      <a href="{% url 'home_index' %}">Author</a>
+      <a href="{% url 'home:index' %}">Author</a>
     </div>
 
     {% with request.path as current_url %}
     <nav id="main-nav-wrap">
       <ul class="main-navigation sf-menu">
         <li class="{% if current_url == "/" %}current{% endif %}">
-          <a href="{% url 'home_index' %}" title="">Home</a>
+          <a href="{% url 'home:index' %}" title="">Home</a>
         </li>
         <li class="has-children {% if "category" in current_url %}current{% endif %}">
-          <a href="{% url 'category_list' %}" title="">Categories</a>
+          <a href="{% url 'article:category_list' %}" title="">Categories</a>
           <ul class="sub-menu">
             {% for category in categories %}
-            <li><a href="{% url 'category_page' category=category.name %}">{{category.name |capfirst}}</a></li>
+            <li><a href="{% url 'article:category_page' category=category.name %}">{{category.name |capfirst}}</a></li>
             {% endfor %}
           </ul>
         </li>
         <li class="has-children {% if "blog" in current_url %}current{% endif %}">
-          <a href="{% url 'blog_index' %}" title="">Blog</a>
+          <a href="{% url 'article:blog_index' %}" title="">Blog</a>
           <ul class="sub-menu">
             <li><a href="single-video.html">Video Post</a></li>
             <li><a href="single-audio.html">Audio Post</a></li>
@@ -30,19 +30,19 @@
           </ul>
         </li>
         <li class="{% if "about" in current_url %}current{% endif %}">
-          <a href="{% url 'about_page' %}" title="">About</a>
+          <a href="{% url 'home:about' %}" title="">About</a>
         </li>
         <li class="{% if "contact" in current_url %}current{% endif %}">
-          <a href="{% url 'contact_page' %}" title="">Contact</a>
+          <a href="{% url 'home:contact' %}" title="">Contact</a>
         </li>
-        <li class="{% if "contact" in current_url %}current{% endif %}">
-          <a href="{% url 'contact_page' %}" title="">Support</a>
+        <li class="{% if "support" in current_url %}current{% endif %}">
+          <a href="{% url 'home:support' %}" title="">Support</a>
         </li>
-        <li class="{% if "contact" in current_url %}current{% endif %}">
-          <a href="{% url 'contact_page' %}" title="">Credits</a>
+        <li class="{% if "credits" in current_url %}current{% endif %}">
+          <a href="{% url 'home:credits' %}" title="">Credits</a>
         </li>
-        <li class="{% if "contact" in current_url %}current{% endif %}">
-          <a href="{% url 'contact_page' %}" title="">FAQ</a>
+        <li class="{% if "faq" in current_url %}current{% endif %}">
+          <a href="{% url 'home:faq' %}" title="">FAQ</a>
         </li>
       </ul>
     </nav>
@@ -50,12 +50,13 @@
     <!-- end main-nav-wrap -->
 
     <div class="search-wrap">
-      <form role="search" method="get" class="search-form" action="#">
+      <form class="search-form" id="search-form">
         <label>
           <span class="hide-content">Search for:</span>
           <input
             type="search"
             class="search-field"
+            id="search-field"
             placeholder="Type Your Keywords"
             value=""
             name="s"
