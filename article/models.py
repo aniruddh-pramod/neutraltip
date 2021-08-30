@@ -3,6 +3,7 @@ from django.template.defaultfilters import slugify
 from django.utils.crypto import get_random_string
 from django.urls import reverse
 
+from datetime import datetime
 
 # Create your models here.
 
@@ -46,7 +47,8 @@ class Article(models.Model):
     body = models.TextField()
     excerpt = models.TextField(max_length=500, blank=True)
     show_excerpt_in_article = models.BooleanField(default=True)
-    date = models.DateTimeField(auto_now_add=True)
+    date = models.DateField(default=datetime.now)
+    time = models.TimeField(auto_now_add=True)
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     thumb = models.ImageField(blank=True)
     thumb_alt = models.CharField(max_length=50, default='', blank=True)
@@ -56,6 +58,9 @@ class Article(models.Model):
 
     def snippet(self):
         return self.body[:50] + '...'
+    
+    def get_datetime(self):
+        return datetime.combine(self.date, self.time)
 
     def get_absolute_url(self):
         kwargs = {
