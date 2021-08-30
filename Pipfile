@@ -8,6 +8,8 @@ django = "*"
 djangorestframework = "*"
 pillow = "*"
 django-markdownify = "*"
+algoliasearch-django = "*"
+django-hitcount = "*"
 
 [dev-packages]
 
