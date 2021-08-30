@@ -1,31 +1,80 @@
-from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
+from django.views.generic import ListView, DetailView
 
 from .models import Article
 
-def article_detail(request, slug):
-    article = get_object_or_404(Article, slug=slug)
-    
-    article_id = article.id
 
-    # Previous article
-    if article_id > 1:
-        previous_article = Article.objects.get(id=article_id - 1)
-    else:
-        previous_article = Article.objects.get(id=1)
-    
-    # Next article
-    if article_id < Article.objects.count():
-        next_article = Article.objects.get(id=article_id + 1)
-    else:
-        next_article = Article.objects.get(id=Article.objects.count())
+class ArticleDetailView(DetailView):
+    model = Article
+    template_name = 'article/single-standard.html'
+    context_object_name = 'article'
 
-    context = {
-        'article': article,
-        'previous_article': previous_article,
-        'next_article': next_article,
-    }
-    return render(request, 'article/single-standard.html', context)
+    def get_object(self):
+        article = super(ArticleDetailView, self).get_object()
+        slug = self.kwargs['slug']
+        article = get_object_or_404(Article, slug=slug)
+        return article
+    
+    def get_previous_article(self):
+        article_id = self.get_object().id
+        if article_id > 1:
+            previous_article = Article.objects.get(id=article_id-1)
+        else:
+            previous_article = Article.objects.get(id=1)
+        
+        return previous_article
+    
+    def get_next_article(self):
+        article_id = self.get_object().id
+        if article_id < Article.objects.count():
+            next_article = Article.objects.get(id=article_id + 1)
+        else:
+            next_article = Article.objects.get(id=Article.objects.count())
+        
+        return next_article
+    
+    
+    def get_context_data(self, **kwargs):
+        context = super(ArticleDetailView, self).get_context_data(**kwargs)
+        context['previous_article'] = self.get_previous_article()
+        context['next_article'] = self.get_next_article()
+        return context
+        
+
+class SearchArticlesListView(ListView):
+    model = Article
+    template_name = 'article/search-articles.html'
+    paginate_by = 10
+    context_object_name = 'articles'
+    
+    def get_queryset(self):
+        articles = super(SearchArticlesListView, self).get_queryset()
+        query = self.kwargs.get('query', None)
+        articles = Article.objects.filter(title__contains=query)
+
+        sort_by = self.request.GET.get('sort_by', '')
+        date_from = self.request.GET.get('date_from', '')
+        date_to = self.request.GET.get('date_to', '')
+
+        if sort_by == 'newest':
+            articles = articles.order_by('-date')
+        elif sort_by == 'oldest':
+            articles = articles.order_by('date')
+        
+        if date_from and date_to:
+            articles = articles.filter(date__range=(date_from, date_to))
+        
+        return articles
+    
+    def get_context_data(self, **kwargs):
+        context = super(SearchArticlesListView, self).get_context_data(**kwargs)
+        context['query'] = self.kwargs.get('query', None)
+        context['filters'] = {
+            'sort_by': self.request.GET.get('sort_by', ''),
+            'date_from': self.request.GET.get('date_from', ''),
+            'date_to': self.request.GET.get('date_to', ''),
+        }
+        return context
 
 
 def blog(request):
