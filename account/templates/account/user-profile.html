@@ -1,4 +1,5 @@
 {% extends 'home/base.html' %}
+{% load account_tags %}
 
 {% block meta %}
 {% include 'home/components/~common/meta.html' with meta_title=user.userprofile.get_full_name|add:' (@'|add:user.username|add:') | Neutral Tip' meta_desc=user.userprofile.bio %}
@@ -27,10 +28,11 @@
     margin-top: 0;
 }
 
-.upper-section img {
+.upper-section img, .upper-section svg {
     width: 240px;
     height: 240px;
     vertical-align: top;
+    border-radius: 50%;
     user-select: none;
 }
 
@@ -69,10 +71,10 @@
 
     <div class="main">
         <div class="upper-section">
-            <img src="{{user.userprofile.profile_pic.url}}" alt="{{user.userprofile.}}">
+            {% profile_pic user %}
 
             <div class="about-user">
-                <h1 class="name">{{user.userprofile.get_full_name}} (@{{user.username}})</h1>
+                <h1 class="name">{{user.userprofile.get_full_name}} @{{user.username}}</h1>
                 <p class="bio">{{user.userprofile.bio}}</p>
                 <div class="socials">
                     {% if user.userprofile.facebook %}
@@ -104,11 +106,11 @@
                     <ul>
                     {% for article in articles %}
                     <li>
-                        <a href="{% url 'article_detail' slug=article.slug %}">{{article}}</a>
-                         - {{article.date}}
+                        <a href="{% url 'article:detail' slug=article.slug %}">{{article}}</a>
+                         - {{article.get_datetime}}
                         
                          ---
-                        <a href="{% url 'category_page' category=article.category %}">{{article.category |capfirst}}</a>
+                        <a href="{% url 'article:category_page' category=article.category %}">{{article.category |capfirst}}</a>
                     </li>
                     {% endfor %}
                 </ul>
