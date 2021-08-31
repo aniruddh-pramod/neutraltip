@@ -3,14 +3,13 @@
 ## Credits
  - Django Framework
  - Pillow library
- - Markdownify library
- - Jdenticon library
- - Hitcount library
+ - Markdownify library - https://django-markdownify.readthedocs.io/en/latest/
+ - Jdenticon library - https://jdenticon.com/
+ - Hitcount library - https://django-hitcount.readthedocs.io/en/latest/
 
 
 ## TODOs
  - create category list and page
- - count hitcount and add relevence filter in search
  - create blog as seperate timeline articles
  - create tag list and page
  - create about, contact, credits, FAQ page
