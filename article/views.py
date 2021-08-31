@@ -1,13 +1,15 @@
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView
+from hitcount.views import HitCountDetailView
 
 from .models import Article
 
 
-class ArticleDetailView(DetailView):
+class ArticleDetailView(HitCountDetailView):
     model = Article
     template_name = 'article/single-standard.html'
     context_object_name = 'article'
+    count_hit = True
 
     def get_object(self):
         article = super(ArticleDetailView, self).get_object()
@@ -56,7 +58,9 @@ class SearchArticlesListView(ListView):
         date_from = self.request.GET.get('date_from', '')
         date_to = self.request.GET.get('date_to', '')
 
-        if sort_by == 'newest':
+        if sort_by == 'popular':
+            articles = articles.order_by('-hit_count_generic__hits')
+        elif sort_by == 'newest':
             articles = articles.order_by('-date')
         elif sort_by == 'oldest':
             articles = articles.order_by('date')

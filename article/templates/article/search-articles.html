@@ -91,7 +91,8 @@ Search: {{query}} | Neutral Tip
         <form class="filters" action="{% url 'article:search' query=query %}">
             <h3>Filters:</h3>
             <select name="sort_by" id="filter">
-                <option value="">Default</option>
+                <option value="">default</option>
+                <option value="popular" {% if filters.sory_by == "popular" %}selected{% endif %}>popular</option>
                 <option value="newest" {% if filters.sort_by == "newest" %}selected{% endif %}>newest first</option>
                 <option value="oldest" {% if filters.sort_by == "oldest" %}selected{% endif %}>oldest first</option>
             </select>

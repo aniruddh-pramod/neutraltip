@@ -1,4 +1,7 @@
 from django.db import models
+from django.contrib.contenttypes.fields import GenericRelation
+from hitcount.models import HitCount, HitCountMixin
+
 from django.template.defaultfilters import slugify
 from django.utils.crypto import get_random_string
 from django.urls import reverse
@@ -39,7 +42,8 @@ class Tag(models.Model):
 
 
 
-class Article(models.Model):
+class Article(models.Model, HitCountMixin):
+    hit_count_generic = GenericRelation(HitCount, object_id_field='object_pk', related_query_name='hit_count_generic_relation')
     title = models.CharField(max_length=100)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category')
     tags = models.ManyToManyField(Tag, blank=True, related_name='tag')
