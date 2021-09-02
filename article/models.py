@@ -46,13 +46,14 @@ class Article(models.Model, HitCountMixin):
     hit_count_generic = GenericRelation(HitCount, object_id_field='object_pk', related_query_name='hit_count_generic_relation')
     title = models.CharField(max_length=100)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category')
-    tags = models.ManyToManyField(Tag, blank=True, related_name='tag')
+    tags = models.ManyToManyField(Tag, blank=False, related_name='tag')
     slug = models.SlugField(default='', editable=False, max_length=200, null=False, unique=True)
     body = models.TextField()
     excerpt = models.TextField(max_length=500, blank=True)
     show_excerpt_in_article = models.BooleanField(default=True)
     date = models.DateField(default=datetime.now)
     time = models.TimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     thumb = models.ImageField(blank=True)
     thumb_alt = models.CharField(max_length=50, default='', blank=True)
@@ -85,14 +86,15 @@ class Article(models.Model, HitCountMixin):
 
 
 class Comment(models.Model):
-    article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='comments')
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE, blank=True, null=True)
+    article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='article')
     name = models.CharField(max_length=50)
     email = models.EmailField()
     body = models.TextField()
-    date = models.DateTimeField(auto_now_add=True)
+    datetime = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.name
 
     class Meta:
-        ordering = ['-date']
+        ordering = ['-datetime']
