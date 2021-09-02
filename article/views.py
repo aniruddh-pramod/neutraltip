@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView
 from hitcount.views import HitCountDetailView
 
-from .models import Article
+from .models import Article, Comment
 
 
 class ArticleDetailView(HitCountDetailView):
@@ -10,12 +10,6 @@ class ArticleDetailView(HitCountDetailView):
     template_name = 'article/single-standard.html'
     context_object_name = 'article'
     count_hit = True
-
-    def get_object(self):
-        article = super(ArticleDetailView, self).get_object()
-        slug = self.kwargs['slug']
-        article = get_object_or_404(Article, slug=slug)
-        return article
     
     def get_previous_article(self):
         article_id = self.get_object().id
@@ -38,6 +32,7 @@ class ArticleDetailView(HitCountDetailView):
     
     def get_context_data(self, **kwargs):
         context = super(ArticleDetailView, self).get_context_data(**kwargs)
+        context['comments'] = Comment.objects.filter(article=self.get_object())
         context['previous_article'] = self.get_previous_article()
         context['next_article'] = self.get_next_article()
         return context
@@ -84,14 +79,4 @@ class SearchArticlesListView(ListView):
 def blog(request):
     return render(request, 'article/article-detail.html')
 def blog_detail(request, blog):
-    return render(request, 'article/article-detail.html')
-def category(request, category):
-    return render(request, 'article/article-detail.html')
-def category_list(request):
-    return render(request, 'article/article-detail.html')
-def tag(request, tag):
-    return render(request, 'article/article-detail.html')
-def about(request):
-    return render(request, 'article/article-detail.html')
-def contact(request):
     return render(request, 'article/article-detail.html')
