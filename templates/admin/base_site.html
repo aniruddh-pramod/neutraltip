@@ -1,0 +1,13 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | Neutral Tip{% endblock %}
+
+{% block branding %}
+    <h1 id="site-name">
+        <a href="{% url 'admin_panel' %}" title="{{ title }}">
+            <img src="{% static 'home/images/logo.png' %}" height="40px" alt="neutral tip">
+            NEUTRAL TIP Admin Panel
+        </a>
+    </h1>
+{% endblock branding %}
