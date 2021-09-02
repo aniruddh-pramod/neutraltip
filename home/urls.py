@@ -1,13 +1,17 @@
 from django.urls import path
 
+from django.views.generic import TemplateView
 from . import views
 
 app_name = 'home'
 urlpatterns = [
     path('', views.ArticleListView.as_view(), name='index'),
-    path('about/', views.about, name='about'),
-    path('contact/', views.contact, name='contact'),
-    path('support/', views.support, name='support'),
-    path('credits/', views.credits, name='credits'),
-    path('faq/', views.faq, name='faq'),
+    path('category/', views.category_all, name='category_all'),
+    path('category/<str:category>/', views.CategoryListView.as_view(), name='category_page'),
+    path('tag/<str:tag>/', views.TagListView.as_view(), name='tag_page'),
+    path('about/', TemplateView.as_view(template_name='home/about.html'), name='about'),
+    path('contact/', TemplateView.as_view(template_name='home/contact.html'), name='contact'),
+    path('support/', TemplateView.as_view(template_name='home/support.html'), name='support'),
+    path('credits/', TemplateView.as_view(template_name='home/credits.html'), name='credits'),
+    path('faqs/', views.FaqListView.as_view(), name='faqs'),
 ]
