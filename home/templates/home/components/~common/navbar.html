@@ -2,8 +2,9 @@
   <div class="gradient-block"></div>
 
   <div class="row header-content">
-    <div class="logo">
-      <a href="{% url 'home:index' %}">Author</a>
+    <div class="logo" onclick="window.location='/'">
+      <img href="{% url 'home:index' %}" />
+      <span> | NEUTRAL TIP</span>
     </div>
 
     {% with request.path as current_url %}
@@ -13,10 +14,10 @@
           <a href="{% url 'home:index' %}" title="">Home</a>
         </li>
         <li class="has-children {% if "category" in current_url %}current{% endif %}">
-          <a href="{% url 'article:category_list' %}" title="">Categories</a>
+          <a href="{% url 'home:category_all' %}" title="">Categories</a>
           <ul class="sub-menu">
             {% for category in categories %}
-            <li><a href="{% url 'article:category_page' category=category.name %}">{{category.name |capfirst}}</a></li>
+            <li><a href="{% url 'home:category_page' category=category.name %}">{{category.name |capfirst}}</a></li>
             {% endfor %}
           </ul>
         </li>
@@ -42,7 +43,7 @@
           <a href="{% url 'home:credits' %}" title="">Credits</a>
         </li>
         <li class="{% if "faq" in current_url %}current{% endif %}">
-          <a href="{% url 'home:faq' %}" title="">FAQ</a>
+          <a href="{% url 'home:faqs' %}" title="">FAQ</a>
         </li>
       </ul>
     </nav>

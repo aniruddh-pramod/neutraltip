@@ -17,10 +17,10 @@
 		<div class="bricks-wrapper">
 			<div class="grid-sizer"></div>
 
-			{% include 'home/components/Home/featured.html' with featured_articles=featured_articles %}
+			{% include 'home/components/card/featured.html' with featured_articles=featured_articles %}
 			
 			{% for article in articles %}
-				{% include 'home/components/Home/general-card.html' with article=article %}
+				{% include 'home/components/card/general-card.html' with article=article %}
 			{% endfor %}
 		</div>
 		<!-- end brick-wrapper -->
@@ -31,7 +31,7 @@
         <div class="row">
             <nav class="pagination">
                 {% if page_obj.has_previous %}
-                    <a href="/?page={{ page_obj.previous_page_number }}" class="page-numbers prev">Prev</a>
+                    <a href="?page={{ page_obj.previous_page_number }}" class="page-numbers prev">Prev</a>
                 {% else %}
                     <span class="page-numbers prev inactive">Prev</span>
                 {% endif %}
@@ -40,12 +40,12 @@
                     {% if page_obj.number == i %}
                         <span class="page-numbers current">{{ i }}</span>
                     {% else %}
-                        <a href="/?page={{ i }}" class="page-numbers">{{ i }}</a>
+                        <a href="?page={{ i }}" class="page-numbers">{{ i }}</a>
                     {% endif %}
                 {% endfor %}
 
                 {% if page_obj.has_next %}
-                    <a href="/?page={{ page_obj.next_page_number }}" class="page-numbers next">Next</a>
+                    <a href="?page={{ page_obj.next_page_number }}" class="page-numbers next">Next</a>
                 {% else %}
                     <span class="page-numbers next inactive">Next</span>
                 {% endif %}

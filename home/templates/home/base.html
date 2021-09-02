@@ -73,7 +73,11 @@
 		<!-- end header -->
 
 		{% comment %} Actual Body {% endcomment %}
-		{% block body %}{% endblock body %} {% block js %}{% endblock js %}
+		{% block body %}{% endblock body %}
+		
+		<script>
+		{% block js %}{% endblock js %}
+		</script>
 
 		<!-- footer
 		================================================== -->

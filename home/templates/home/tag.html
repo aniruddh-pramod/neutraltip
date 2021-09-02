@@ -1,7 +1,7 @@
 {% extends 'home/base.html' %}
 
 
-{% block title %}Category: {{ category|capfirst }} | Neutral Tip{% endblock title %}
+{% block title %}Tag: {{ tag }} | Neutral Tip{% endblock title %}
 
 {% block body %}
 
@@ -10,7 +10,7 @@
 <section id="page-header">
 	<div class="row current-cat">
 		<div class="col-full">
-			<h1>Category: {{ category|capfirst }}</h1>
+			<h1>Tag: {{ tag }}</h1>
 		</div>
 	</div>
 </section>
@@ -56,7 +56,7 @@
 						{% endif %}
 				</nav>
 		</div>
-    {% endif %}
+	{% endif %}
 </section>
 <!-- bricks -->
 

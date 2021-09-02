@@ -11,13 +11,13 @@
 
   <div class="entry-text">
     <div class="entry-header">
+    {% if not 'category' in request.path %}
       <div class="entry-meta">
         <span class="cat-links">
-          {% for tag in article.tags.all %}
-          <a href="{% url 'article:tag_page' tag=tag %}">{{tag}}</a>
-          {% endfor %}
+          <a href="#">{{article.category |capfirst}}</a>
         </span>
       </div>
+    {% endif %}
 
       <h1 class="entry-title">
         <a href="{% url 'article:detail' slug=article.slug %}">{{article.title}}</a>
