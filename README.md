@@ -9,10 +9,19 @@
 
 
 ## TODOs
- - create category list and page
+ - previous and next articles must be of same category
+ - create custom contact model and functionality
+ - create tnc, privacy policies, publish policies page
  - create blog as seperate timeline articles
- - create tag list and page
  - create about, contact, credits, FAQ page
+  
+  Advanced TODOs:
+ - prevent spam when registering user (use hitcounts)
+ - add neutrality meter
+ - 
+  Optional TODOs:
+ - make cards in category list, with images, description
+ - create admin page
 
 
 ## Algolia Setup
