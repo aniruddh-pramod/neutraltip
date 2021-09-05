@@ -45,6 +45,16 @@
         <li class="{% if "faq" in current_url %}current{% endif %}">
           <a href="{% url 'home:faqs' %}" title="">FAQ</a>
         </li>
+        {% if request.user.is_authenticated %}
+        <li class="has-children {% if "myprofile" in current_url %}current{% endif %}">
+          <a href="{% url 'article:blog_index' %}" title="">MyAccount</a>
+          <ul class="sub-menu">
+            <li><a href="{% url 'account:user_profile' user=request.user %}">Profile</a></li>
+            <hr>
+            <li><a href="{% url 'account:logout' %}">Logout</a></li>
+          </ul>
+        </li>
+        {% endif %}
       </ul>
     </nav>
     {% endwith %}
