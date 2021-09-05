@@ -36,6 +36,7 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.user.username
     
+    # === PS: Ignore should have 'self' as first argument warning ===
     # Create a user profile when a user is created
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):
@@ -61,15 +62,12 @@ class UserProfile(models.Model):
             self.profile_pic.delete()
             super().delete(*args, **kwargs)
     
-    def get_absolute_url(self):
-        return reverse('accounts:profile', kwargs={'username': self.user.username})
-    
     def get_full_name(self):
         return self.user.first_name + ' ' + self.user.last_name
     
     def get_age(self):
         if self.dob:
-            today = date.today()
+            today = self.date.today()
             return today.year - self.dob.year - ((today.month, today.day) < (self.dob.month, self.dob.day))
         else:
             return None
