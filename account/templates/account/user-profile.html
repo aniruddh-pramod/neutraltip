@@ -35,6 +35,16 @@
     flex-direction: column;
 }
 
+.about-user div {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+}
+.about-user div button {
+    margin-left: 1em;
+    font-size: 1.2em;
+}
+
 .about-user .socials a {
     color: #000;
     font-size: 1.5em;
@@ -66,17 +76,22 @@
             {% profile_pic user %}
 
             <div class="about-user">
-                <h1 class="name">{{user.userprofile.get_full_name}} @{{user.username}}</h1>
+                <div>
+                    <h1 class="name">{{user.userprofile.get_full_name}} @{{user.username}}</h1>
+                    {% if can_edit %}
+                    <button onclick="window.location='{% url 'account:user_profile_edit' user=user.username %}';">Edit</button>
+                    {% endif %}
+                </div>
                 <p class="bio">{{user.userprofile.bio}}</p>
                 <div class="socials">
                     {% if user.userprofile.facebook %}
-                        <a href="{{user.userprofile.facebook}}" target="_blank"><i class="fa fa-facebook"></i></a>
+                        <a href="https://facebook.com/{{user.userprofile.facebook}}" target="_blank"><i class="fa fa-facebook"></i></a>
                     {% endif %}
                     {% if user.userprofile.twitter %}
-                        <a href="{{user.userprofile.twitter}}" target="_blank"><i class="fa fa-twitter"></i></a>
+                        <a href="https://twitter.com/{{user.userprofile.twitter}}" target="_blank"><i class="fa fa-twitter"></i></a>
                     {% endif %}
                     {% if user.userprofile.instagram %}
-                        <a href="{{user.userprofile.instagram}}" target="_blank"><i class="fa fa-instagram"></i></a>
+                        <a href="https://instagram.com/{{user.userprofile.instagram}}" target="_blank"><i class="fa fa-instagram"></i></a>
                     {% endif %}
                     {% if user.userprofile.website %}
                         <a href="{{user.userprofile.website}}" target="_blank"><i class="fa fa-link"></i></a>
