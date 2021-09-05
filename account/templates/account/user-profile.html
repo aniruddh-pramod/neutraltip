@@ -10,14 +10,6 @@
 {% endblock title %}
 
 {% block css %}
-.main {
-    margin-top: 3em;
-    margin-bottom: 3em;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 55em;
-}
-
 .upper-section {
     display: flex;
     flex-direction: row;
@@ -110,7 +102,7 @@
                          - {{article.get_datetime}}
                         
                          ---
-                        <a href="{% url 'article:category_page' category=article.category %}">{{article.category |capfirst}}</a>
+                        <a href="{% url 'home:category_page' category=article.category %}">{{article.category |capfirst}}</a>
                     </li>
                     {% endfor %}
                 </ul>
