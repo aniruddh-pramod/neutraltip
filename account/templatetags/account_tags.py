@@ -22,15 +22,16 @@ def profile_pic(user):
     if profile.profile_pic:
         return mark_safe(f'<img class="profile-pic" src="{profile.profile_pic.url}" alt="{profile.get_full_name()}" />')
     else:
-        return mark_safe(f'<svg data-jdenticon-value="{profile.get_full_name()} {profile_dob}"></svg>')
+        return mark_safe(f'<svg data-jdenticon-value="{user.email}"></svg>')
 
 
 @register.simple_tag
 def user_name(user, href=False):
-    profile = user.userprofile
-    
-    if not profile.display_profile:
+    print(user.is_authenticated)
+    if user.is_authenticated == False or not user.userprofile.display_profile:
         return ''
+
+    profile = user.userprofile
     
     if profile.get_full_name:
         if href:
