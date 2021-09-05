@@ -9,17 +9,18 @@
 
 
 ## TODOs
- - previous and next articles must be of same category
- - create custom contact model and functionality
+ - validate submit anonymously feature in SUBMIT article page
  - create tnc, privacy policies, publish policies page
  - create blog as seperate timeline articles
  - create about, contact, credits, FAQ page
   
   Advanced TODOs:
+ - previous and next articles must be of same category
  - prevent spam when registering user (use hitcounts)
  - add neutrality meter
- - 
+  
   Optional TODOs:
+ - create custom contact model and functionality
  - make cards in category list, with images, description
  - create admin page
 
