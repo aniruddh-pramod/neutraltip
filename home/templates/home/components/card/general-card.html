@@ -14,7 +14,7 @@
     {% if not 'category' in request.path %}
       <div class="entry-meta">
         <span class="cat-links">
-          <a href="#">{{article.category |capfirst}}</a>
+          <a href="{% url 'home:category_page' category=article.category %}">{{article.category |capfirst}}</a>
         </span>
       </div>
     {% endif %}
