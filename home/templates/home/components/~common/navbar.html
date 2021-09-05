@@ -47,7 +47,7 @@
         </li>
         {% if request.user.is_authenticated %}
         <li class="has-children {% if "myprofile" in current_url %}current{% endif %}">
-          <a href="{% url 'article:blog_index' %}" title="">MyAccount</a>
+          <a href="#" title="">MyAccount</a>
           <ul class="sub-menu">
             <li><a href="{% url 'account:user_profile' user=request.user %}">Profile</a></li>
             <hr>
