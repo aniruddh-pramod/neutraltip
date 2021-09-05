@@ -7,6 +7,9 @@ from django.utils.crypto import get_random_string
 from django.urls import reverse
 
 from datetime import datetime
+import os, uuid
+
+from .validators import validate_file_size
 
 # Create your models here.
 
@@ -95,6 +98,39 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        ordering = ['-datetime']
+
+
+# article request submition model
+class ArticleSubmission(models.Model):
+    # converting filename into random string
+    def get_hashed_file_path(instance, filename):
+        ext = filename.split('.')[-1]
+        filename = "%s.%s" % (uuid.uuid4(), ext)
+        return os.path.join('documents/', filename)
+
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE, blank=True, null=True)
+    as_anonymous = models.BooleanField(default=False)
+    name = models.CharField(max_length=50)
+    title = models.CharField(max_length=100)
+    email = models.EmailField()
+    body = models.TextField(blank=True)
+    summary = models.TextField(max_length=500, blank=True)
+    additional_info = models.TextField(max_length=500, blank=True)
+    thumb = models.ImageField(blank=True)
+    thumb_alt = models.CharField(max_length=50, default='', blank=True)
+    datetime = models.DateTimeField(auto_now=True)
+    documents = models.FileField(upload_to=get_hashed_file_path, validators=[validate_file_size], blank=False)
+    
+    def __str__(self):
+        return self.name
+    
+    def delete(self, *args, **kwargs):
+        if self.documents:
+            self.documents.delete()
+            super().delete(*args, **kwargs)
 
     class Meta:
         ordering = ['-datetime']
