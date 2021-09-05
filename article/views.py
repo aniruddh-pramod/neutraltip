@@ -1,8 +1,12 @@
 from django.shortcuts import render, get_object_or_404
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
+from django.contrib.messages.views import SuccessMessageMixin
 from hitcount.views import HitCountDetailView
+from django.urls import reverse_lazy
 
-from .models import Article, Comment
+from django.contrib.auth.models import User
+from .forms import ArticleSubmissionForm
+from .models import Article, Comment, ArticleSubmission
 
 
 class ArticleDetailView(HitCountDetailView):
@@ -75,6 +79,25 @@ class SearchArticlesListView(ListView):
         }
         return context
 
+class ArticleSubmissionView(SuccessMessageMixin, CreateView):
+    model = ArticleSubmission
+    form_class = ArticleSubmissionForm
+    template_name = 'article/submit-article.html'
+    context_object_name = 'article'
+    success_url = reverse_lazy('article:submit-success')
+    success_message = 'Your article request has been submitted successfully. Expect a response within 48 hrs.'
+
+    def post(self, request, *args, **kwargs):
+        form = self.get_form()
+        if form.is_valid() and request.user.is_authenticated:
+            form.instance.user = User.objects.get(username=request.user)
+            form.instance.save()
+            return self.form_valid(form)
+        else:
+            return self.form_valid(form)
+
+def article_submission_success(request):
+    return render(request, 'article/submit-success.html')
 
 def blog(request):
     return render(request, 'article/article-detail.html')
