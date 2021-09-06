@@ -85,11 +85,3 @@ def category_all(request):
         'categories': Category.objects.all()
     }
     return render(request, 'home/category_all.html', context)
-
-
-def blog(request):
-    return render(request, 'article/article-detail.html')
-def blog_detail(request, blog):
-    return render(request, 'article/article-detail.html')
-def support(request):
-    return HttpResponse('support')
