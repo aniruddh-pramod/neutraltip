@@ -96,10 +96,21 @@ class ArticleSubmissionView(SuccessMessageMixin, CreateView):
         else:
             return self.form_valid(form)
 
+
+class BlogView(ListView):
+    model = Article
+    template_name = 'article/blog.html'
+    context_object_name = 'articles'
+
+    def get_queryset(self):
+        articles = super(BlogView, self).get_queryset()
+        articles = articles.filter(tags__name='blog').order_by('-date')
+        return articles
+
 def article_submission_success(request):
     return render(request, 'article/submit-success.html')
 
 def blog(request):
-    return render(request, 'article/article-detail.html')
+    return render(request, 'article/blog.html')
 def blog_detail(request, blog):
-    return render(request, 'article/article-detail.html')
+    return render(request, 'article/blog-post.html')
