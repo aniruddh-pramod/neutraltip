@@ -110,6 +110,12 @@ class ArticleSubmission(models.Model):
         ext = filename.split('.')[-1]
         filename = "%s.%s" % (uuid.uuid4(), ext)
         return os.path.join('documents/', filename)
+    
+    status_choices = (
+        ('pending', 'Pending'),
+        ('approved', 'Approved'),
+        ('rejected', 'Rejected'),
+    )
 
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE, blank=True, null=True)
     as_anonymous = models.BooleanField(default=False)
@@ -123,9 +129,10 @@ class ArticleSubmission(models.Model):
     thumb_alt = models.CharField(max_length=50, default='', blank=True)
     datetime = models.DateTimeField(auto_now=True)
     documents = models.FileField(upload_to=get_hashed_file_path, validators=[validate_file_size], blank=False)
+    status = models.CharField(choices=status_choices, max_length=50, default='pending')
     
     def __str__(self):
-        return self.name
+        return self.title
     
     def delete(self, *args, **kwargs):
         if self.documents:
