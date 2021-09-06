@@ -9,17 +9,20 @@
 
 
 ## TODOs
- - validate submit anonymously feature in SUBMIT article page
+ - https://fcm-django.readthedocs.io/en/latest/
+ - https://jinja.palletsprojects.com/en/3.0.x/switching/#django
+ - add tags in easier way
  - create tnc, privacy policies, publish policies page
  - create blog as seperate timeline articles
  - create about, contact, credits, FAQ page
   
   Advanced TODOs:
  - previous and next articles must be of same category
- - prevent spam when registering user (use hitcounts)
+ - prevent spam when registering user (use IP address)
  - add neutrality meter
   
   Optional TODOs:
+ - change 'Display Profile' to 'Go Anonymous'
  - create custom contact model and functionality
  - make cards in category list, with images, description
  - create admin page
