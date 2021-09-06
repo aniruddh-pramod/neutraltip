@@ -1,4 +1,5 @@
 {% extends 'home/base.html' %}
+{% load markdownify %}
 
 {% block title %}Faqs | Neutral Tip{% endblock title %}
 
@@ -28,12 +29,15 @@
   content: "\2796"; /* Unicode character for "minus" sign (-) */
 }
 
-.content {
+.primary-content p {
   padding: 0 18px;
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.2s ease-out;
   background-color: #f1f1f1;
+}
+.primary-content a {
+  text-decoration: underline;
 }
 {% endblock css %}
 
@@ -51,7 +55,7 @@
         <div class="primary-content">
           {% for faq in faqs %}
           <h3 class="collapsible">{{ faq.question|capfirst }}</h3>
-          <p class="content">{{ faq.answer }}</p>
+          {{ faq.answer |markdownify:"strict" }}
           {% endfor %}
         </div>
               
