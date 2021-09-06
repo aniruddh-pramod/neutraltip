@@ -19,7 +19,7 @@ class CommentAdmin(admin.ModelAdmin):
 
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
-    pass
+    search_fields = ('name',)
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
@@ -27,4 +27,6 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(ArticleSubmission)
 class ArticleSubmissionAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('title', 'user', 'datetime', 'status')
+    list_filter = ('status', 'datetime')
+    search_fields = ('title', 'body', 'summary',)   
