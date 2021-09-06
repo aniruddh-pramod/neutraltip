@@ -8,6 +8,6 @@ urlpatterns = [
     path('submit/', views.ArticleSubmissionView.as_view(), name='submit'),
     path('submit/success/', views.article_submission_success, name='submit-success'),
     path('search/<str:query>/', views.SearchArticlesListView.as_view(), name='search'),
-    path('blog/', views.blog, name='blog_index'),
+    path('blog/', views.BlogView.as_view(), name='blog'),
     path('blog/<slug:blog>/', views.blog_detail, name='blog_detail'),
 ]
