@@ -52,19 +52,21 @@ MARKDOWNIFY = {
     'default': {
         'WHITELIST_TAGS': ['a', 'p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' 'br', 'pre', 'code', 'blockquote', 'img', 'ul', 'ol', 'li', 'table', 'thead', 'tbody', 'tr', 'th', 'td', 'hr', ],
         'WHITELIST_ATTRS': ['class', 'href', 'src', 'alt', 'title'],
-        'MARKDOWN_EXTENSIONS': ['markdown.extensions.fenced_code', ],
-    },
-
-    'strict': {
-        'WHITELIST_TAGS': ['a', 'p', ],
         'MARKDOWN_EXTENSIONS': [
             'markdown.extensions.extra',
             'markdown.extensions.codehilite',
             'markdown.extensions.toc',
             'markdown.extensions.wikilinks',
-            'markdown.extensions.nl2br',
+            'markdown.extensions.nl2br',],
+    },
+
+    'strict': {
+        'WHITELIST_TAGS': ['a', 'p'],
+        'WHITELIST_ATTRS': ['class', 'href', 'title'],
+        'MARKDOWN_EXTENSIONS': [
+            'markdown.extensions.extra',
         ],
-    }
+    },
 }
 
 MIDDLEWARE = [
