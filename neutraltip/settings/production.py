@@ -10,7 +10,8 @@ SECRET_KEY = env('SECRET_KEY')
 
 DEBUG = env.bool('DEBUG', default=False)
 
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
+# ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'neutraltip.herokuapp.com']
 
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
@@ -25,4 +26,3 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())
-    
