@@ -7,6 +7,7 @@
  - Jdenticon library - https://jdenticon.com/
  - Hitcount library - https://django-hitcount.readthedocs.io/en/latest/
  - Simple is better than complex - https://simpleisbetterthancomplex.com/
+ - https://blog.heroku.com/from-project-to-productionized-python#code-runtime-txt-code
 
 
 ## TODOs
