@@ -9,6 +9,10 @@ djangorestframework = "*"
 pillow = "*"
 django-markdownify = "*"
 django-hitcount = "*"
+gunicorn = "*"
+django-heroku = "*"
+whitenoise = "*"
+django-environ = "*"
 
 [dev-packages]
 
