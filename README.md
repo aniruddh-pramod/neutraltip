@@ -6,6 +6,7 @@
  - Markdownify library - https://django-markdownify.readthedocs.io/en/latest/
  - Jdenticon library - https://jdenticon.com/
  - Hitcount library - https://django-hitcount.readthedocs.io/en/latest/
+ - Simple is better than complex - https://simpleisbetterthancomplex.com/
 
 
 ## TODOs
