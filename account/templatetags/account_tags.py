@@ -27,7 +27,6 @@ def profile_pic(user):
 
 @register.simple_tag
 def user_name(user, href=False):
-    print(user.is_authenticated)
     if user.is_authenticated == False or not user.userprofile.display_profile:
         return ''
 
