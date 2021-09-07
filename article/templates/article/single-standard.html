@@ -6,7 +6,6 @@
 {% include 'home/components/~common/meta.html' with meta_title=article.title meta_desc=article.body|striptags|truncatechars:150 %}
 {% endblock meta %}
 
-
 {% block title %}
 {{ article.title }} | by {{article.author.userprofile.get_full_name}} | Neutral Tip
 {% endblock title %}
