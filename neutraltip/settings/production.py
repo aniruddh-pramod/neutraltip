@@ -4,11 +4,13 @@ import os
 import environ
 import django_heroku
 
-env = environ.Env()
+env = environ.Env(
+    DEBUG=(bool, False),
+)
 
 SECRET_KEY = env('SECRET_KEY')
 
-DEBUG = env.bool('DEBUG', default=False)
+DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
 
