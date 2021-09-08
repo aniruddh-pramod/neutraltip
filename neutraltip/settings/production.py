@@ -10,7 +10,7 @@ env = environ.Env(
 
 SECRET_KEY = env('SECRET_KEY')
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -23,8 +23,7 @@ DATABASES['default']['CONN_MAX_AGE'] = 60
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Whitenoise gzip compression
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())
