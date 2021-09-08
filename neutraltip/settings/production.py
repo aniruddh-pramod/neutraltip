@@ -23,7 +23,8 @@ DATABASES['default']['CONN_MAX_AGE'] = 60
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Whitenoise gzip compression
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())
