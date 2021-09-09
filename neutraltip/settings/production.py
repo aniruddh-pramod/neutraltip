@@ -10,7 +10,7 @@ env = environ.Env(
 
 SECRET_KEY = 'django-insecure-+-sxd16*k5i=8na*#72q3g_(mls-u2mbiecq8)4m($dt_gfx1b'
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
