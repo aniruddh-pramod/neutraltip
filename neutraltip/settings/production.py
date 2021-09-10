@@ -21,6 +21,7 @@ MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
 DATABASES['default']['CONN_MAX_AGE'] = 60
 
 # Whitenoise compression
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 # Activate Django-Heroku.
 django_heroku.settings(locals(), staticfiles=False)
