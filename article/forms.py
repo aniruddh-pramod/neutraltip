@@ -6,7 +6,7 @@ from .models import ArticleSubmission
 class ArticleSubmissionForm(ModelForm):
     class Meta:
         model = ArticleSubmission
-        exclude = ['user', 'body',]
+        exclude = ['user', 'body', 'status']
         field_requireds = {
             'title': _('Title is required.'),
             'email': _('Email is required for validation purpose.'),
