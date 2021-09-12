@@ -11,7 +11,7 @@ register = template.Library()
 def profile_pic(user):
     profile = user.userprofile
 
-    if user.is_authenticated == False or not profile.display_profile:
+    if not profile.display_profile:
         return ''
     
     if profile.dob:
@@ -26,13 +26,13 @@ def profile_pic(user):
 
 
 @register.simple_tag
-def user_name(user, href=False):
-    if user.is_authenticated == False or not user.userprofile.display_profile:
+def user_name(user, href=False, with_username=False):
+    if not user.userprofile.display_profile:
         return ''
 
     profile = user.userprofile
     
-    if profile.get_full_name:
+    if profile.get_full_name() != ' ':
         if href:
             return mark_safe(f'<a href="{reverse("account:user_profile", kwargs={"user": user.username})}">{profile.get_full_name()}</a>')
         else:

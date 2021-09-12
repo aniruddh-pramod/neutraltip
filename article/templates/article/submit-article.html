@@ -61,8 +61,8 @@ textarea:focus, input:focus {
             <form action="{% url 'article:submit' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             
-            {% user_name user href=True as user_name %}
-            {% if user_name %}
+            {% if request.user.is_authenticated %}
+                {% user_name user href=True as user_name %}
                 <h3> Currently logged in as: {{user_name}}</h3>
             {% else %}
                 <h3> Anonymous Identity </h3>
