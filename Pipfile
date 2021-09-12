@@ -13,7 +13,6 @@ gunicorn = "*"
 django-heroku = "*"
 whitenoise = "*"
 django-environ = "*"
-psycopg2-binary = "*"
 django-cloudinary-storage = "*"
 
 [dev-packages]
