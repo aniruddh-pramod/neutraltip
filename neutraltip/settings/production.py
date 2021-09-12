@@ -36,7 +36,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 # Media settings
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.RawMediaCloudinaryStorage'
-MEDIA_URL = '/media/'
+MEDIA_URL = '/neutraltip/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 # Activate Django-Heroku.
