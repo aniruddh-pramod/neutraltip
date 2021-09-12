@@ -22,7 +22,7 @@ def profile_pic(user):
     if profile.profile_pic:
         return mark_safe(f'<img class="profile-pic" src="{profile.profile_pic.url}" alt="{profile.get_full_name()}" />')
     else:
-        return mark_safe(f'<svg data-jdenticon-value="{user.email}"></svg>')
+        return mark_safe(f'<svg data-jdenticon-value="{user}"></svg>')
 
 
 @register.simple_tag

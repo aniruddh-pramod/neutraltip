@@ -58,7 +58,7 @@ class Article(models.Model, HitCountMixin):
     time = models.TimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
-    thumb = models.ImageField(blank=True)
+    thumb = models.ImageField(blank=True, upload_to='article/article_thumbs')
     thumb_alt = models.CharField(max_length=50, default='', blank=True)
 
     def __str__(self):
@@ -109,7 +109,7 @@ class ArticleSubmission(models.Model):
     def get_hashed_file_path(instance, filename):
         ext = filename.split('.')[-1]
         filename = "%s.%s" % (uuid.uuid4(), ext)
-        return os.path.join('documents/', filename)
+        return os.path.join('article/submissions/documents/', filename)
     
     status_choices = (
         ('pending', 'Pending'),
@@ -125,7 +125,7 @@ class ArticleSubmission(models.Model):
     body = models.TextField(blank=True)
     summary = models.TextField(max_length=500, blank=True)
     additional_info = models.TextField(max_length=500, blank=True)
-    thumb = models.ImageField(blank=True)
+    thumb = models.ImageField(upload_to='article/submissions/submission_thumbs', blank=True)
     thumb_alt = models.CharField(max_length=50, default='', blank=True)
     datetime = models.DateTimeField(auto_now=True)
     documents = models.FileField(upload_to=get_hashed_file_path, validators=[validate_file_size], blank=False)

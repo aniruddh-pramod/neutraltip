@@ -13,6 +13,7 @@
 ## TODOs
  - https://fcm-django.readthedocs.io/en/latest/
  - https://jinja.palletsprojects.com/en/3.0.x/switching/#django
+ - optimized media files (compressed loading)
  - add tags in easier way
  - create tnc, privacy policies, publish policies page
  - create blog as seperate timeline articles

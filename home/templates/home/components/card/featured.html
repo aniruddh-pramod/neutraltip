@@ -1,3 +1,4 @@
+{% load static %}
 {% load account_tags %}
 
 <div class="brick entry featured-grid animate-this">
@@ -13,7 +14,7 @@
                 {% if article.thumb %}
                 background-image: url('{{article.thumb.url}}');
                 {% else %}
-                background-image: url('/media/default.png');
+                background-image: url('{% static 'home/images/default.png' %}');
                 {% endif %}
               "
             ></div>
