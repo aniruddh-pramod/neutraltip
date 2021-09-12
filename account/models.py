@@ -46,15 +46,6 @@ class UserProfile(models.Model):
     # def save_user_profile(sender, instance, **kwargs):
     #     instance.user_profile.save()
     
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-        if self.profile_pic:
-            img = Image.open(self.profile_pic.path)
-            if img.height > 300 or img.width > 300:
-                output_size = (300, 300)
-                img.thumbnail(output_size)
-                img.save(self.profile_pic.path)
-    
     def delete(self, *args, **kwargs):
         if self.profile_pic:
             self.profile_pic.delete()
