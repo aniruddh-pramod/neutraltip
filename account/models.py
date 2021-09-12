@@ -29,7 +29,7 @@ class UserProfile(models.Model):
     display_profile = models.BooleanField(default=True)
     display_bio = models.BooleanField(default=True)
     display_socials = models.BooleanField(default=True)
-    profile_pic = models.ImageField(upload_to='profile_pics', blank=True)
+    profile_pic = models.ImageField(upload_to='accounts/profile_pics', blank=True)
 
     def __str__(self):
         return self.user.username
