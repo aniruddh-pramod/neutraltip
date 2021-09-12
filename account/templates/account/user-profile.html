@@ -21,6 +21,7 @@
 }
 
 .upper-section img, .upper-section svg {
+    flex-basis: 200%;
     width: 240px;
     height: 240px;
     vertical-align: top;
@@ -29,6 +30,7 @@
 }
 
 .about-user {
+    max-width: 600px;
     margin-top: 2em;
     margin-left: 4em;
     display: flex;
@@ -43,6 +45,9 @@
 .about-user div button {
     margin-left: 1em;
     font-size: 1.2em;
+}
+.about-user .bio {
+    word-break: break-word;
 }
 
 .about-user .socials a {
@@ -65,6 +70,20 @@
 
 .tab-content {
     margin-top: 2em;
+}
+
+@media all and (max-width: 768px) {
+    .upper-section {
+        flex-direction: column;
+        align-items: center;
+    }
+    .upper-section img, .upper-section h1 {
+        display: block;
+        margin-top: 0.5em;
+    }
+    .upper-section img, .upper-section svg {
+        height: auto;
+    }
 }
 
 {% endblock css %}
