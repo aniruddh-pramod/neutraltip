@@ -11,7 +11,7 @@ register = template.Library()
 def profile_pic(user):
     profile = user.userprofile
 
-    if not profile.display_profile:
+    if user.is_authenticated == False or not profile.display_profile:
         return ''
     
     if profile.dob:
