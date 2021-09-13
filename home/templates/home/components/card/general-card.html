@@ -3,7 +3,7 @@
 <article class="brick entry format-standard animate-this">
   {% if article.thumb %}
   <div class="entry-thumb">
-    <a href="single-standard.html" class="thumb-link">
+    <a href="{% url 'article:detail' slug=article.slug %}" class="thumb-link">
       <img src="{{article.thumb.url}}" alt="{{article.thumb_alt}}" />
     </a>
   </div>
