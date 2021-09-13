@@ -61,7 +61,7 @@
 							{% profile_pic article.author %}
 
 							<div class="about">
-								<h4>{% user_name article.author with_username=True %}</h4>
+								<h4>{% user_name article.author href=True with_username=True %}</h4>
 
 								{% if author.display_bio %}
 								<p>{{author.bio}}</p>
