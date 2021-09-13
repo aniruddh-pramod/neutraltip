@@ -51,7 +51,7 @@ class SearchArticlesListView(ListView):
     def get_queryset(self):
         articles = super(SearchArticlesListView, self).get_queryset()
         query = self.kwargs.get('query', None)
-        articles = Article.objects.filter(title__contains=query)
+        articles = Article.objects.filter(title__icontains=query)
 
         sort_by = self.request.GET.get('sort_by', '')
         date_from = self.request.GET.get('date_from', '')
