@@ -45,9 +45,9 @@ select:focus, textarea:focus, input:focus {
 <section id="content-wrap">
     <div class="row">
 
-    <form action="{% url 'account:user_profile_edit' user=request.user %}" method="post">
+    <form action="{% url 'account:user_profile_edit' %}" method="post">
         {% csrf_token %}
-
+        
         {% for element in form %}
             <div class="form-group">
             <label for="title">{{element.label}}:</label>

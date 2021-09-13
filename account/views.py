@@ -40,15 +40,17 @@ class UserProfileEditView(UpdateView):
     context_object_name = 'user'
 
     def get_object(self, queryset=None):
-        obj = UserProfile.objects.get(user=self.request.user)
-        return obj
+        if self.request.user.is_authenticated:
+            obj = UserProfile.objects.get(user=self.request.user)
+            return obj
+        else:
+            raise Http404('u trynna be funny?')
     
     def get_success_url(self):
         return self.get_redirect_url(self.request.user)
     
     def get_redirect_url(self, user):
         return reverse_lazy('account:user_profile_edit',
-                            kwargs={'user': user},
                             current_app='account')
 
 

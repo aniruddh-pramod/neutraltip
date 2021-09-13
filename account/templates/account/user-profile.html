@@ -98,7 +98,7 @@
                 <div>
                     <h1 class="name">{{user.userprofile.get_full_name}} @{{user.username}}</h1>
                     {% if can_edit %}
-                    <button onclick="window.location='{% url 'account:user_profile_edit' user=user.username %}';">Edit</button>
+                    <button onclick="window.location='{% url 'account:user_profile_edit' %}';">Edit</button>
                     {% endif %}
                 </div>
                 <p class="bio">{{user.userprofile.bio}}</p>
