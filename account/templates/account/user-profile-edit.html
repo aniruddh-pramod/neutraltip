@@ -1,6 +1,11 @@
 {% extends 'home/base.html' %}
+{% load home_tags %}
 
 {% block title %}Edit Profile | Neutral Tip{% endblock title %}
+
+{% block meta %}
+{% robot %}
+{% endblock meta %}
 
 {% block css %}
 input, textarea {
