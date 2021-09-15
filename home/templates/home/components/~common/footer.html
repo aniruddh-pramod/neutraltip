@@ -19,8 +19,8 @@
           <li><a href="{% url 'home:about' %}">About Us</a></li>
           <li><a href="{% url 'article:blog' %}">Blog</a></li>
           <li><a href="{% url 'home:faqs' %}">FAQ</a></li>
-          <li><a href="#">Terms</a></li>
-          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="{% url 'home:terms' %}">Terms</a></li>
+          <li><a href="{% url 'home:privacy_policy' %}">Privacy Policy</a></li>
         </ul>
       </div>
       <!-- end site-links -->
@@ -69,7 +69,7 @@
     <div class="row">
       <div class="col-twelve">
         <div class="copyright">
-          <span>© Neutral Tip Pvt. Ltd. 2021</span>
+          <span>&copy; Neutral Tip Pvt. Ltd. 2021</span>
           <span
             >Template theme credit -
             <a href="http://www.styleshout.com/" target="_blank">styleshout</a>
