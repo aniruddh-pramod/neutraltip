@@ -18,7 +18,6 @@
  - add tags in easier way
  - create tnc, privacy policies, publish policies page
  - create blog as seperate timeline articles
- - create about, contact, credits, FAQ page
   
   Advanced TODOs:
  - previous and next articles must be of same category
