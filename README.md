@@ -6,6 +6,7 @@
  - Markdownify library - https://django-markdownify.readthedocs.io/en/latest/
  - Jdenticon library - https://jdenticon.com/
  - Hitcount library - https://django-hitcount.readthedocs.io/en/latest/
+ - Django Cloudinary Storage library - https://pypi.org/project/django-cloudinary-storage/
  - Simple is better than complex - https://simpleisbetterthancomplex.com/
  - https://blog.heroku.com/from-project-to-productionized-python#code-runtime-txt-code
 
