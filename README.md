@@ -29,3 +29,4 @@
  - create custom contact model and functionality
  - make cards in category list, with images, description
  - create admin page
+ - inbuilt logout view

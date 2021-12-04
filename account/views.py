@@ -1,5 +1,5 @@
 from django.http import HttpResponse, Http404, HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import View
 from django.views.generic.edit import UpdateView
@@ -7,6 +7,9 @@ from django.contrib.auth import logout
 
 from django.contrib.auth.models import User
 # from django.contrib.auth.decorators import login_required
+
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.forms import UserCreationForm
 
 from .models import UserProfile
 from article.models import Article
@@ -58,3 +61,19 @@ class LogoutView(View):
     def get(self, request):
         logout(request)
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+def sign_up(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('home:index')
+    else:
+        form = UserCreationForm()
+    return render(request, 'account/sign-up.html', {'form': form})

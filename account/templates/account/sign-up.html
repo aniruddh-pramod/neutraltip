@@ -1,0 +1,35 @@
+{% extends 'home/base.html' %}
+
+{% block title %}Sign Up | Neutral Tip{% endblock title %}
+
+{% block css %}
+input {
+    width: 100%;
+    margin-bottom: 0;
+}
+
+.errorlist {
+    color: red;
+}
+{% endblock css %}
+
+{% block body %}
+
+<section id="content-wrap">
+    <div class="row">
+
+    <form action="{% url 'account:signup' %}" method="post">
+        {% csrf_token %}
+        
+        {{ form }}
+
+        <br><br>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+
+    </div>
+</section>
+
+
+{% endblock body %}
