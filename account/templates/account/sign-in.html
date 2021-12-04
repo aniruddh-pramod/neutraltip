@@ -18,7 +18,7 @@ input {
 <section id="content-wrap">
     <div class="row">
 
-        <form action="{% url 'account:signup' %}" method="post">
+        <form action="{% url 'account:signin' %}" method="post">
             {% csrf_token %}
             
             {{ form }}

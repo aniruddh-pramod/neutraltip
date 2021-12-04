@@ -39,7 +39,7 @@ header .logo span {
 }
 
 
-@media all and (max-width: 1000px) {
+@media all and (max-width: 1150px) {
   header .logo span {
     display: none;
   }

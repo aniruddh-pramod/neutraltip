@@ -48,6 +48,13 @@
             <li><a href="{% url 'account:logout' %}">Logout</a></li>
           </ul>
         </li>
+        {% else %}
+        <li class="{% if "sign-in" in current_url %}current{% endif %}">
+          <a href="{% url 'account:signin' %}" title="">Login</a>
+        </li>
+        <li class="{% if "sign-up" in current_url %}current{% endif %}">
+          <a href="{% url 'account:signup' %}" title="">Register</a>
+        </li>
         {% endif %}
       </ul>
     </nav>
