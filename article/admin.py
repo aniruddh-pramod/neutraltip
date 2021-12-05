@@ -4,11 +4,16 @@ from .models import Article, Comment, Tag, Category, ArticleSubmission
 
 # Register your models here.
 
+class CommentAdmin(admin.TabularInline):
+    model = Comment
+
+
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
     list_display = ('title', 'author', 'category', 'date', 'time', 'updated_at', 'views')
     list_filter = ('category', 'date', 'updated_at')
     search_fields = ('title', 'body', 'excerpt',)
+    inlines = [CommentAdmin]
 
     def views(self, obj):
         return obj.hit_count.hits
