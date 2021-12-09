@@ -22,7 +22,7 @@ input {
 
         <form action="{% url 'account:signup' %}" method="post">
             {% csrf_token %}
-            
+
             {{ form }}
 
             <br><br>
