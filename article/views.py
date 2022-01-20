@@ -1,3 +1,4 @@
+from unicodedata import category
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView
 from django.contrib.messages.views import SuccessMessageMixin
@@ -18,18 +19,18 @@ class ArticleDetailView(HitCountDetailView):
     def get_previous_article(self):
         article_id = self.get_object().id
         if article_id > 1:
-            previous_article = Article.objects.get(id=article_id-1)
+            previous_article = Article.objects.get(id=article_id-1,category=self.model.category)
         else:
-            previous_article = Article.objects.get(id=1)
+            previous_article = Article.objects.get(id=1,category=self.model.category)
         
         return previous_article
     
     def get_next_article(self):
         article_id = self.get_object().id
         if article_id < Article.objects.count():
-            next_article = Article.objects.get(id=article_id + 1)
+            next_article = Article.objects.get(id=article_id + 1,category=self.model.category)
         else:
-            next_article = Article.objects.get(id=Article.objects.count())
+            next_article = Article.objects.get(id=Article.objects.count(),category=self.model.category)
         
         return next_article
     
